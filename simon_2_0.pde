@@ -141,7 +141,7 @@ void gamestart() {
   game = new ArrayList<Integer>();
   for (int i = 0; i < round; i++)
   {
-    game.add(int(random(1, 4)));
+    game.add(int(random(1, 5)));
   }
   for (int i = 0; i < game.size(); i++) {
 
