@@ -12,13 +12,19 @@ int rounds = 1;    //Variable for rounds
 
 boolean win = false;
 
+boolean grn = false;
+boolean red = false;
+boolean ylw = false;
+boolean blu = false;
+
+ArrayList<Integer> game;
 
 //Setup - Runs once at the start
 void setup() {
 
   win = false;
 
-
+game = new ArrayList<Integer>();
 
   frameRate(60);
 
@@ -49,9 +55,9 @@ void draw() {
   fill(255);
   text (mouseX + " X", 600, 60);
   text (mouseY + " Y", 600, 70);
-  
+
   fill(0);
-  quad(300, 300, 400, 300, 400, 400, 300, 400);
+  quad(300, 330, 400, 330, 400, 360, 300, 360);
   fill(255);
   textSize(16);
   text ("Round " + rounds, 315, 350);
@@ -66,6 +72,7 @@ void mousePressed() {
     fill(0);
     textSize(90);
     text("Green", 50, 170);
+    grn = true;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > -10 && mouseY < 350) {
     fill(242, 164, 166);
@@ -73,6 +80,7 @@ void mousePressed() {
     fill(0);
     textSize(90);
     text("Red", 450, 170);
+    red = true;
   }
   if (mouseX > -10 && mouseX < 350 && mouseY > 350 && mouseY < 700) {
     fill(241, 242, 164);
@@ -80,6 +88,7 @@ void mousePressed() {
     fill(0);
     textSize(90);
     text("Yellow", 50, 550);
+    ylw = true;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > 350 && mouseY < 700) {
     fill( 175, 164, 242);
@@ -87,6 +96,7 @@ void mousePressed() {
     fill(0);
     textSize(90);
     text("Blue", 450, 550);
+    blu = true;
   }
 }
 
@@ -96,26 +106,36 @@ void mouseReleased() {
   if (mouseX > -10 && mouseX < 350 && mouseY > -10 && mouseY < 350) {
     fill(0, 255, 0);
     quad(0, 0, 350, 0, 350, 350, 0, 350);
+    grn = false;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > -10 && mouseY < 350) {
     fill(255, 0, 0);
     quad(350, 0, 700, 0, 750, 350, 350, 350);
+    red = false;
   }
   if (mouseX > -10 && mouseX < 350 && mouseY > 350 && mouseY < 700) {
     fill(255, 243, 3);
     quad(0, 350, 350, 350, 350, 700, 0, 700);
+    ylw = false;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > 350 && mouseY < 700) {
     fill(0, 0, 255);
     quad(350, 350, 700, 350, 700, 700, 350, 700);
-  } 
-}
-  void keyPressed() {
-    if (key == ' ') {
-      rounds = rounds + 1;
-    }
-    
-    //The variables for the buttons themselves
- 
-    
+    blu = false;
   }
+}
+void keyPressed() {
+  if (key == ' ') {
+    rounds = rounds + 1;
+  }
+  
+//void gamestart(){
+//  //Simon = new ArrayList<Integer>();
+//  for(int i = 0; i < round ;i++)
+//  {
+//    game.add(int(random(1,5)));
+//  }
+//    for(int i = 0; i < game.size() ;i++)
+//  {
+ 
+}
