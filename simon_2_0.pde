@@ -3,19 +3,22 @@
 import processing.sound.*;    //Import sound library
 
 
-//SoundFile q;      //Gives sounds names
-//SoundFile w;
-//SoundFile a;
-//SoundFile s;
+SoundFile q;      //Gives sounds names
+SoundFile w;
+SoundFile a;
+SoundFile s;
+
+SoundFile oh;
+SoundFile ooh;
 
 int round = 1;    //Variable for rounds
 
 boolean win = false;
 
-boolean grn = false;
-boolean red = false;
-boolean ylw = false;
-boolean blu = false;
+boolean grn ;
+boolean red ;
+boolean ylw ;
+boolean blu ;
 
 ArrayList<Integer> game;
 
@@ -31,10 +34,11 @@ void setup() {
   size(700, 700);           //Canvas size
   background(0);            //Background colour
 
-  //q = new SoundFile(this, "q.mp3");                //Declares hitsounds as soundfiles
-  //w = new SoundFile(this, "w.mp3");
-  //a = new SoundFile(this, "a.mp3");
-  //s = new SoundFile(this, "s.mp3");
+  q = new SoundFile(this, "flvr1.mp3");                //Declares hitsounds as soundfiles
+  w = new SoundFile(this, "flvr2.mp3");
+  a = new SoundFile(this, "flvr3.mp3");
+  s = new SoundFile(this, "flvr4.mp3");
+  oh = new SoundFile(this, "ech.mp3");
 
   fill(0, 255, 0);                                  //Draw 4 coloured squares
   quad(0, 0, 350, 0, 350, 350, 0, 350);             //}
@@ -68,15 +72,20 @@ void mousePressed() {
 
   if (mouseX > -10 && mouseX < 350 && mouseY > -10 && mouseY < 350) {
     grnplay();
+    grn = false;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > -10 && mouseY < 350) {
     redplay();
+    red = false;
   }
   if (mouseX > -10 && mouseX < 350 && mouseY > 350 && mouseY < 700) {
     ylwplay();
+    ylw = false;
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > 350 && mouseY < 700) {
     bluplay();
+    blu = false;
+    
   }
 }
 
@@ -86,22 +95,22 @@ void mouseReleased() {
   if (mouseX > -10 && mouseX < 350 && mouseY > -10 && mouseY < 350) {
     fill(0, 255, 0);
     quad(0, 0, 350, 0, 350, 350, 0, 350);
-    grn = false;
+    
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > -10 && mouseY < 350) {
     fill(255, 0, 0);
     quad(350, 0, 700, 0, 750, 350, 350, 350);
-    red = false;
+
   }
   if (mouseX > -10 && mouseX < 350 && mouseY > 350 && mouseY < 700) {
     fill(255, 243, 3);
     quad(0, 350, 350, 350, 350, 700, 0, 700);
-    ylw = false;
+ 
   }
   if (mouseX > 350 && mouseX < 700 && mouseY > 350 && mouseY < 700) {
     fill(0, 0, 255);
     quad(350, 350, 700, 350, 700, 700, 350, 700);
-    blu = false;
+  
   }
 }
 void keyPressed() {
@@ -112,53 +121,45 @@ void keyPressed() {
     gamestart();
   }
 
-  //Makes the game run
-  //void gamestart() {
-  //  Simon = new ArrayList<Integer>();
-  //  for (int i = 0; i < round; i++)
-  //  {
-  //    game.add(int(random(1, 5)));
-  //  }  
-  //  for (int i = 0; i < game.size(); i++)
-  //    if (Simon.get(i) == 1)
-  //    {
-  //      grnplay();
-  //    } else if (Simon.get(i) == 2) {
-  //      redplay();
-  //    } else if (Simon.get(i) == 3) {
-  //      ylwplay();
-  //    } else if (Simon.get(i) == 4) {
-  //      bluplay();   
-  //    }
 
+//The win variables (winning the round increses teh score)
   if (win == true) {
     round = round + 1;
+    oh.play();
   }
 } 
 
+//The variable for the game rounds
 void gamestart() {
 
+  //New arrays for the game
   game = new ArrayList<Integer>();
   for (int i = 0; i < round; i++)
   {
     game.add(int(random(1, 5)));
+    
   }
   for (int i = 0; i < game.size(); i++) {
 
     if (game.get(i) == 1) {
       grnplay();
+      grn = true;
     }
     if (game.get(i) == 2) {
       redplay();
+      red =  true;
     }
     if (game.get(i) == 3) {
       ylwplay();
+      ylw = true;
     }
     if (game.get(i) == 4) {
       bluplay();
+      blu = true;
     }
   }
 }
+
 
 
 //The buttons themselves
@@ -168,6 +169,7 @@ void grnplay() {
   fill(0);
   textSize(90);
   text("Green", 50, 170);
+  q.play();
 }
 void redplay() {
   fill(242, 164, 166);
@@ -175,6 +177,7 @@ void redplay() {
   fill(0);
   textSize(90);
   text("Red", 450, 170);
+  w.play();
 }
 void ylwplay() {
   fill(241, 242, 164);
@@ -182,6 +185,7 @@ void ylwplay() {
   fill(0);
   textSize(90);
   text("Yellow", 50, 550);
+  a.play();
 }
 void bluplay() {
   fill( 175, 164, 242);
@@ -189,4 +193,5 @@ void bluplay() {
   fill(0);
   textSize(90);
   text("Blue", 450, 550);
+  s.play();
 }
